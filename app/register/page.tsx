@@ -45,14 +45,15 @@ export default function RegisterPage() {
         password: form.password,
         role: form.role as "ADMIN" | "HR" | "EMPLOYEE",
       });
-      router.push("/dashboard");
+      router.push("/login");
     } catch (err: any) {
-      const msg =
-        err.response?.data?.message?.[0] ||
-        err.response?.data?.message ||
-        "Registration failed. Please try again.";
+      const message = err.response?.data?.message;
 
-      setErrors({ submit: msg });
+      setErrors({
+        submit: Array.isArray(message)
+          ? message.join(", ")
+          : message || "Registration failed. Please try again.",
+      });
     } finally {
       setLoading(false);
     }

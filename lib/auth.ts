@@ -26,11 +26,6 @@ export const authService = {
       "/auth/register",
       payload
     );
-
-    Cookies.set("access_token", response.data.accessToken, {
-      expires: 7,
-    });
-
     return response.data;
   },
 
